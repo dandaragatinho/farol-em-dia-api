@@ -17,6 +17,10 @@ class FarolEmDiaApiTest(unittest.TestCase):
         os.unlink(self.caminho_db)
 
     def test_fluxo_completo(self):
+        inicio = self.client.get("/")
+        self.assertEqual(inicio.status_code, 200)
+        self.assertEqual(inicio.get_json()["saude"], "/api/saude")
+
         saude = self.client.get("/api/saude")
         self.assertEqual(saude.status_code, 200)
 

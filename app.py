@@ -258,6 +258,17 @@ def create_app(configuracao_teste=None):
                 db.executescript(arquivo_seed.read())
         db.commit()
 
+    @app.get("/")
+    def inicio():
+        return jsonify(
+            {
+                "servico": "Farol em Dia API",
+                "status": "online",
+                "saude": "/api/saude",
+                "documentacao": "/apidocs/",
+            }
+        )
+
     @app.get("/api/saude")
     def saude():
         return jsonify({"status": "online", "servico": "Farol em Dia API", "horario": agora_iso()})
